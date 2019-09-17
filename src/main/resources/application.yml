@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/home_fashion
+    username: postgres
+    password: post
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+    jpa:
+      database-platform: org.hibernate.dialect.PostgreSQLDialect
+      database: postgresql
+      show-sql: true
+      properties:
+        hibernate.jdbc.lob.non_contextual_creation: true
+        hibernate.temp.use_jdbc_metadata_defaults: false
+
+logging:
+  level:
+    org.hibernate.engine.jdbc.env.internal.LobCreatorBuilderImpl: ERROR
