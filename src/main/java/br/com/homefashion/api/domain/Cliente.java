@@ -1,9 +1,11 @@
 package br.com.homefashion.api.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -46,11 +48,71 @@ public class Cliente implements Serializable {
     private Integer usuario;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Transient
-    private Endereco endereco;
+    @Column(name = "cep")
+    private String cep;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "estado")
+    private String estado;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "cidade")
+    private String cidade;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "bairro")
+    private String bairro;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "logradouro")
+    private String logradouro;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "numero")
+    private Integer numero;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "cod_ibge")
+    private Integer codIBGE;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnore
+    private ArrayList<String> listaEstados;
+
 
     public Cliente() {
-        endereco = new Endereco();
+        popularListaDeEstados();
+    }
+
+    private void popularListaDeEstados(){
+        listaEstados = new ArrayList<>();
+        listaEstados.add("AC");
+        listaEstados.add("AL");
+        listaEstados.add("AM");
+        listaEstados.add("AP");
+        listaEstados.add("BA");
+        listaEstados.add("CE");
+        listaEstados.add("DF");
+        listaEstados.add("ES");
+        listaEstados.add("GO");
+        listaEstados.add("MA");
+        listaEstados.add("MG");
+        listaEstados.add("MS");
+        listaEstados.add("MT");
+        listaEstados.add("PA");
+        listaEstados.add("PB");
+        listaEstados.add("PE");
+        listaEstados.add("PI");
+        listaEstados.add("PR");
+        listaEstados.add("RJ");
+        listaEstados.add("RN");
+        listaEstados.add("RO");
+        listaEstados.add("RR");
+        listaEstados.add("RS");
+        listaEstados.add("SC");
+        listaEstados.add("SE");
+        listaEstados.add("SP");
+        listaEstados.add("TO");
     }
 
     public Integer getId() {
@@ -109,20 +171,76 @@ public class Cliente implements Serializable {
         this.rg = rg;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
     public Integer getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Integer usuario) {
         this.usuario = usuario;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public Integer getNumero() {
+        return numero;
+    }
+
+    public void setNumero(Integer numero) {
+        this.numero = numero;
+    }
+
+    public Integer getCodIBGE() {
+        return codIBGE;
+    }
+
+    public void setCodIBGE(Integer codIBGE) {
+        this.codIBGE = codIBGE;
+    }
+
+    public ArrayList<String> getListaEstados() {
+        return listaEstados;
+    }
+
+    public void setListaEstados(ArrayList<String> listaEstados) {
+        this.listaEstados = listaEstados;
     }
 
     @Override
@@ -138,12 +256,19 @@ public class Cliente implements Serializable {
                 Objects.equals(telefone1, cliente.telefone1) &&
                 Objects.equals(telefone2, cliente.telefone2) &&
                 Objects.equals(usuario, cliente.usuario) &&
-                Objects.equals(endereco, cliente.endereco);
+                Objects.equals(cep, cliente.cep) &&
+                Objects.equals(estado, cliente.estado) &&
+                Objects.equals(cidade, cliente.cidade) &&
+                Objects.equals(bairro, cliente.bairro) &&
+                Objects.equals(logradouro, cliente.logradouro) &&
+                Objects.equals(numero, cliente.numero) &&
+                Objects.equals(codIBGE, cliente.codIBGE) &&
+                Objects.equals(listaEstados, cliente.listaEstados);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, dataNascimento, cpf, rg, telefone1, telefone2, usuario, endereco);
+        return Objects.hash(id, nome, dataNascimento, cpf, rg, telefone1, telefone2, usuario, cep, estado, cidade, bairro, logradouro, numero, codIBGE, listaEstados);
     }
 
     @Override
@@ -157,7 +282,14 @@ public class Cliente implements Serializable {
                 ", telefone1=" + telefone1 +
                 ", telefone2=" + telefone2 +
                 ", usuario=" + usuario +
-                ", endereco=" + endereco +
+                ", cep='" + cep + '\'' +
+                ", estado='" + estado + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", logradouro='" + logradouro + '\'' +
+                ", numero=" + numero +
+                ", codIBGE=" + codIBGE +
+                ", listaEstados=" + listaEstados +
                 '}';
     }
 }
