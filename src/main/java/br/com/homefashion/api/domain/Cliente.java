@@ -1,11 +1,10 @@
 package br.com.homefashion.api.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 
@@ -24,6 +23,7 @@ public class Cliente implements Serializable {
     private String nome;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_nascimento")
     private Date dataNascimento;
 
@@ -74,46 +74,6 @@ public class Cliente implements Serializable {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "cod_ibge")
     private Integer codIBGE;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonIgnore
-    private ArrayList<String> listaEstados;
-
-
-    public Cliente() {
-        popularListaDeEstados();
-    }
-
-    private void popularListaDeEstados(){
-        listaEstados = new ArrayList<>();
-        listaEstados.add("AC");
-        listaEstados.add("AL");
-        listaEstados.add("AM");
-        listaEstados.add("AP");
-        listaEstados.add("BA");
-        listaEstados.add("CE");
-        listaEstados.add("DF");
-        listaEstados.add("ES");
-        listaEstados.add("GO");
-        listaEstados.add("MA");
-        listaEstados.add("MG");
-        listaEstados.add("MS");
-        listaEstados.add("MT");
-        listaEstados.add("PA");
-        listaEstados.add("PB");
-        listaEstados.add("PE");
-        listaEstados.add("PI");
-        listaEstados.add("PR");
-        listaEstados.add("RJ");
-        listaEstados.add("RN");
-        listaEstados.add("RO");
-        listaEstados.add("RR");
-        listaEstados.add("RS");
-        listaEstados.add("SC");
-        listaEstados.add("SE");
-        listaEstados.add("SP");
-        listaEstados.add("TO");
-    }
 
     public Integer getId() {
         return id;
@@ -235,14 +195,6 @@ public class Cliente implements Serializable {
         this.codIBGE = codIBGE;
     }
 
-    public ArrayList<String> getListaEstados() {
-        return listaEstados;
-    }
-
-    public void setListaEstados(ArrayList<String> listaEstados) {
-        this.listaEstados = listaEstados;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -262,13 +214,12 @@ public class Cliente implements Serializable {
                 Objects.equals(bairro, cliente.bairro) &&
                 Objects.equals(logradouro, cliente.logradouro) &&
                 Objects.equals(numero, cliente.numero) &&
-                Objects.equals(codIBGE, cliente.codIBGE) &&
-                Objects.equals(listaEstados, cliente.listaEstados);
+                Objects.equals(codIBGE, cliente.codIBGE);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, nome, dataNascimento, cpf, rg, telefone1, telefone2, usuario, cep, estado, cidade, bairro, logradouro, numero, codIBGE, listaEstados);
+        return Objects.hash(id, nome, dataNascimento, cpf, rg, telefone1, telefone2, usuario, cep, estado, cidade, bairro, logradouro, numero, codIBGE);
     }
 
     @Override
@@ -289,7 +240,6 @@ public class Cliente implements Serializable {
                 ", logradouro='" + logradouro + '\'' +
                 ", numero=" + numero +
                 ", codIBGE=" + codIBGE +
-                ", listaEstados=" + listaEstados +
                 '}';
     }
 }
