@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -19,6 +22,7 @@ public class Cliente implements Serializable {
     private Integer id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @NotEmpty(message = "O campo não pode ser vazio.")
     @Column(name = "nome")
     private String nome;
 
@@ -28,6 +32,8 @@ public class Cliente implements Serializable {
     private Date dataNascimento;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @NotNull(message = "O campo não pode ser nulo.")
+    @Size(max = 11, min = 11, message = "O CPF deve ter 11 números.")
     @Column(name = "cpf")
     private String cpf;
 
