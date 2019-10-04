@@ -3,6 +3,7 @@ package br.com.homefashion.api.resources;
 import br.com.homefashion.api.domain.Cliente;
 import br.com.homefashion.api.services.ClientesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/clientes")
@@ -34,7 +36,10 @@ public class ClientesResource {
     public ResponseEntity<?> buscar(@PathVariable("id") Integer id) {
         Optional<Cliente> cliente = null;
         cliente = clientesService.buscar(id);
-        return ResponseEntity.status(HttpStatus.OK).body(cliente);
+
+        CacheControl cacheControl = CacheControl.maxAge(1, TimeUnit.MINUTES);
+
+        return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(cliente);
     }
 
     @RequestMapping(method = RequestMethod.POST)
