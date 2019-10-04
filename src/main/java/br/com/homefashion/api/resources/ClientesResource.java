@@ -34,7 +34,7 @@ public class ClientesResource {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscar(@PathVariable("id") Integer id) {
-        Optional<Cliente> cliente = null;
+        Optional<Cliente> cliente;
         cliente = clientesService.buscar(id);
 
         CacheControl cacheControl = CacheControl.maxAge(1, TimeUnit.MINUTES);
@@ -44,6 +44,7 @@ public class ClientesResource {
 
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<Void> salvar(@Valid @RequestBody Cliente cliente) {
+
         cliente = clientesService.salvar(cliente);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
