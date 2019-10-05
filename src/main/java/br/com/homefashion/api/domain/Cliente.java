@@ -11,6 +11,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import static br.com.homefashion.api.shared.Mensagens.*;
+
 @Table(schema = "vendas", name = "clientes")
 @Entity
 public class Cliente implements Serializable {
@@ -22,7 +24,7 @@ public class Cliente implements Serializable {
     private Integer id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @NotEmpty(message = "O campo não pode ser vazio.")
+    @NotEmpty(message = CAMPO_NAO_VAZIO)
     @Column(name = "nome")
     private String nome;
 
@@ -32,8 +34,8 @@ public class Cliente implements Serializable {
     private Date dataNascimento;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @NotNull(message = "O campo não pode ser nulo.")
-    @Size(max = 11, min = 11, message = "O CPF deve ter 11 números.")
+    @NotNull(message = CAMPO_NAO_NULO)
+    @Size(max = 11, min = 11, message = TAMANHO_CPF)
     @Column(name = "cpf")
     private String cpf;
 

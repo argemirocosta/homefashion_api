@@ -1,7 +1,7 @@
 package br.com.homefashion.api.resources;
 
-import br.com.homefashion.api.domain.Cliente;
-import br.com.homefashion.api.services.ClientesService;
+import br.com.homefashion.api.domain.Usuario;
+import br.com.homefashion.api.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
@@ -16,11 +16,11 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 @RestController
-@RequestMapping("/clientes")
-public class ClientesResource {
+@RequestMapping("/usuarios")
+public class UsuarioResource {
 
     @Autowired
-    private ClientesService clientesService;
+    private UsuarioService usuarioService;
 
     @RequestMapping(value = "/servidor", method = RequestMethod.GET)
     public String testarServidor() {
@@ -28,40 +28,40 @@ public class ClientesResource {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cliente>> listar() {
-        return ResponseEntity.status(HttpStatus.OK).body(clientesService.listar());
+    public ResponseEntity<List<Usuario>> listar() {
+        return ResponseEntity.status(HttpStatus.OK).body(usuarioService.listar());
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscar(@PathVariable("id") Integer id) {
-        Optional<Cliente> cliente;
-        cliente = clientesService.buscar(id);
+        Optional<Usuario> usuario;
+        usuario = usuarioService.buscar(id);
 
         CacheControl cacheControl = CacheControl.maxAge(1, TimeUnit.MINUTES);
 
-        return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(cliente);
+        return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(usuario);
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> salvar(@Valid @RequestBody Cliente cliente) {
+    public ResponseEntity<Void> salvar(@Valid @RequestBody Usuario usuario) {
 
-        cliente = clientesService.salvar(cliente);
+        usuario = usuarioService.salvar(usuario);
 
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(cliente.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deletar(@PathVariable("id") Integer id) {
-        clientesService.deletar(id);
+        usuarioService.deletar(id);
         return ResponseEntity.noContent().build();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> alterar(@RequestBody Cliente cliente, @PathVariable("id") Integer id) {
-        cliente.setId(id);
-        clientesService.alterar(cliente);
+    public ResponseEntity<Void> alterar(@RequestBody Usuario usuario, @PathVariable("id") Integer id) {
+        usuario.setId(id);
+        usuarioService.alterar(usuario);
 
         return ResponseEntity.noContent().build();
     }

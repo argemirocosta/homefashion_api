@@ -1,9 +1,11 @@
 package br.com.homefashion.api.services.exceptions;
 
+import static br.com.homefashion.api.shared.Mensagens.*;
+
 public class ClienteNaoEncontradoException extends RuntimeException {
 
-    public ClienteNaoEncontradoException(String mensagem){
-        super(mensagem);
+    public ClienteNaoEncontradoException(){
+        super(CLIENTE_NAO_ENCONTRADO);
     }
 
     public ClienteNaoEncontradoException(String mensagen, Throwable causa){

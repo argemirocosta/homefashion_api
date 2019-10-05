@@ -24,7 +24,7 @@ public class ClientesService {
         Optional<Cliente> cliente = clientesRepository.findById(id);
 
         if(cliente.isEmpty()){
-            throw new ClienteNaoEncontradoException("Cliente não encontrado!");
+            throw new ClienteNaoEncontradoException();
         }
 
         return cliente;
@@ -41,7 +41,7 @@ public class ClientesService {
         try {
             clientesRepository.deleteById(id);
         }catch (EmptyResultDataAccessException e){
-            throw new ClienteNaoEncontradoException("Cliente não encontrado!");
+            throw new ClienteNaoEncontradoException();
         }
     }
 
