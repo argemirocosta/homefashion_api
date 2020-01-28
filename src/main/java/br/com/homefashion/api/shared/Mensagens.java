@@ -16,7 +16,7 @@ public class Mensagens {
 
     public static final String CAMPO_NAO_VAZIO = "O campo não pode ser vazio!";
 
-    public static final String TAMANHO_CPF = "O 11 deve ter 11 números!";
+    public static final String TAMANHO_CPF = "O CPF deve ter 11 números!";
 
     public static final String ERRO_NAO_ENCONTRADO = "Não encontrado!";
 

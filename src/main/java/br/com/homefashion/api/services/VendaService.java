@@ -13,9 +13,7 @@ public interface VendaService {
 
     Venda salvar(Venda venda);
 
-    void deletar(Integer id);
-
-    void alterar(Venda venda);
-
     List<Venda> consultarVendasPorUsuario(Integer codigoUsuario);
+
+    void cancelarVenda(Integer codigoVenda);
 }

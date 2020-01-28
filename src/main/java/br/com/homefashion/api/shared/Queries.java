@@ -22,4 +22,7 @@ public class Queries {
     public static final String ALTERAR_CANCELAR_PAGAMENTO =
             "UPDATE vendas.pagamentos SET cancelada = TRUE, data_hora_cancelamento = current_timestamp WHERE id = :codigoPagamento";
 
+    public static final String ALTERAR_CANCELAR_VENDA =
+            "UPDATE vendas.venda SET cancelada = TRUE, data_hora_cancelamento = current_timestamp WHERE id = :codigoVenda";
+
 }

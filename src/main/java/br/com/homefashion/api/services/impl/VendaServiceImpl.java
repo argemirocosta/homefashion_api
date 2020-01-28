@@ -3,9 +3,8 @@ package br.com.homefashion.api.services.impl;
 import br.com.homefashion.api.domain.Venda;
 import br.com.homefashion.api.repository.VendaRepository;
 import br.com.homefashion.api.services.VendaService;
-import br.com.homefashion.api.services.exceptions.ClienteNaoEncontradoException;
+import br.com.homefashion.api.services.exceptions.VendaNaoEncontradaException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +24,7 @@ public class VendaServiceImpl implements VendaService {
         Optional<Venda> venda = vendaRepository.findById(id);
 
         if(venda.isEmpty()){
-            throw new ClienteNaoEncontradoException();
+            throw new VendaNaoEncontradaException();
         }
 
         return venda;
@@ -38,25 +37,17 @@ public class VendaServiceImpl implements VendaService {
 
     }
 
-    public void deletar(Integer id){
-        try {
-            vendaRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException e){
-            throw new ClienteNaoEncontradoException();
-        }
-    }
-
-    public void alterar(Venda venda){
-        verificarSeVendaExiste(venda);
-        vendaRepository.save(venda);
-    }
-
-    private void verificarSeVendaExiste(Venda venda){
-        buscar(venda.getId());
-    }
-
     public List<Venda> consultarVendasPorUsuario(Integer codigoUsuario) {
         return vendaRepository.consultarVendasPorUsuario(codigoUsuario);
+    }
+
+    public void cancelarVenda(Integer codigoVenda){
+        verificarSeVendaExiste(codigoVenda);
+        vendaRepository.cancelarVenda(codigoVenda);
+    }
+
+    private void verificarSeVendaExiste(Integer codigoVenda){
+        buscar(codigoVenda);
     }
 
 }

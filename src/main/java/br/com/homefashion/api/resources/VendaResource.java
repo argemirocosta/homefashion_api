@@ -52,22 +52,15 @@ public class VendaResource {
         return ResponseEntity.created(uri).build();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<Void> deletar(@PathVariable("id") Integer id) {
-        vendaService.deletar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> alterar(@RequestBody Venda venda, @PathVariable("id") Integer id) {
-        venda.setId(id);
-        vendaService.alterar(venda);
-
-        return ResponseEntity.noContent().build();
-    }
-
     @RequestMapping(value = "/usuario/{codigoUsuario}", method = RequestMethod.GET)
     public ResponseEntity<List<Venda>> listarVendasPorUsuario(@PathVariable("codigoUsuario") Integer codigoUsuario) {
         return ResponseEntity.status(HttpStatus.OK).body(vendaService.consultarVendasPorUsuario(codigoUsuario));
+    }
+
+    @RequestMapping(value = "/cancela/{codigoVenda}", method = RequestMethod.PUT)
+    public ResponseEntity<Void> cancelarVenda(@PathVariable("codigoVenda") Integer codigoVenda) {
+        vendaService.cancelarVenda(codigoVenda);
+
+        return ResponseEntity.noContent().build();
     }
 }
