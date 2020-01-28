@@ -1,6 +1,6 @@
 package br.com.homefashion.api.services.exceptions;
 
-import static br.com.homefashion.api.shared.Mensagens.*;
+import static br.com.homefashion.api.shared.Mensagens.CLIENTE_NAO_ENCONTRADO;
 
 public class ClienteNaoEncontradoException extends RuntimeException {
 
