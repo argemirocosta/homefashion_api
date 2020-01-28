@@ -1,57 +1,20 @@
 package br.com.homefashion.api.services;
 
 import br.com.homefashion.api.domain.Usuario;
-import br.com.homefashion.api.repository.UsuarioRepository;
-import br.com.homefashion.api.services.exceptions.UsuarioNaoEncontradoException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
-public class UsuarioService {
+public interface UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
+    List<Usuario> listar();
 
-    public List<Usuario> listar(){
-        return usuarioRepository.findAll();
-    }
+    Optional<Usuario> buscar(Integer id);
 
-    public Optional<Usuario> buscar(Integer id){
-        Optional<Usuario> usuario = usuarioRepository.findById(id);
+    Usuario salvar(Usuario usuario);
 
-        if(usuario.isEmpty()){
-            throw new UsuarioNaoEncontradoException();
-        }
+    void deletar(Integer id);
 
-        return usuario;
-    }
-
-    public Usuario salvar(Usuario usuario){
-        usuario.setId(null);
-
-        return usuarioRepository.save(usuario);
-
-    }
-
-    public void deletar(Integer id){
-        try {
-            usuarioRepository.deleteById(id);
-        }catch (EmptyResultDataAccessException e){
-            throw new UsuarioNaoEncontradoException();
-        }
-    }
-
-    public void alterar(Usuario usuario){
-        verificarSeUsuarioExiste(usuario);
-        usuarioRepository.save(usuario);
-    }
-
-    private void verificarSeUsuarioExiste(Usuario usuario){
-        buscar(usuario.getId());
-    }
+    void alterar(Usuario usuario);
 
 }
