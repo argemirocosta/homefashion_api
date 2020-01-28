@@ -16,10 +16,12 @@ public class PagamentoServiceImpl implements PagamentoService {
     @Autowired
     private PagamentoRepository pagamentoRepository;
 
+    @Override
     public List<Pagamento> listar() {
         return pagamentoRepository.findAll();
     }
 
+    @Override
     public Optional<Pagamento> buscar(Integer id) {
         Optional<Pagamento> pagamento = pagamentoRepository.findById(id);
 
@@ -30,6 +32,7 @@ public class PagamentoServiceImpl implements PagamentoService {
         return pagamento;
     }
 
+    @Override
     public Pagamento salvar(Pagamento pagamento) {
         pagamento.setId(null);
 
@@ -37,14 +40,17 @@ public class PagamentoServiceImpl implements PagamentoService {
 
     }
 
+    @Override
     public List<Pagamento> consultarPagamentosPorVenda(Integer codigoVenda) {
         return pagamentoRepository.consultarPagamentosPorVenda(codigoVenda);
     }
 
+    @Override
     public List<Pagamento> consultarPagamentosPorCliente(Integer codigoCliente) {
         return pagamentoRepository.consultarPagamentosPorCliente(codigoCliente);
     }
 
+    @Override
     public void cancelarPagamento(Integer codigoPagamento){
         verificarSePagamentoExiste(codigoPagamento);
         pagamentoRepository.cancelarPagamento(codigoPagamento);

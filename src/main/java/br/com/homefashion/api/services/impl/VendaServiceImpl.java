@@ -16,10 +16,12 @@ public class VendaServiceImpl implements VendaService {
     @Autowired
     private VendaRepository vendaRepository;
 
+    @Override
     public List<Venda> listar(){
         return vendaRepository.findAll();
     }
 
+    @Override
     public Optional<Venda> buscar(Integer id){
         Optional<Venda> venda = vendaRepository.findById(id);
 
@@ -30,6 +32,7 @@ public class VendaServiceImpl implements VendaService {
         return venda;
     }
 
+    @Override
     public Venda salvar(Venda venda){
         venda.setId(null);
 
@@ -37,10 +40,12 @@ public class VendaServiceImpl implements VendaService {
 
     }
 
+    @Override
     public List<Venda> consultarVendasPorUsuario(Integer codigoUsuario) {
         return vendaRepository.consultarVendasPorUsuario(codigoUsuario);
     }
 
+    @Override
     public void cancelarVenda(Integer codigoVenda){
         verificarSeVendaExiste(codigoVenda);
         vendaRepository.cancelarVenda(codigoVenda);

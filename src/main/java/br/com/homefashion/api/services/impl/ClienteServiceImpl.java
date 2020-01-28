@@ -22,6 +22,7 @@ public class ClienteServiceImpl implements ClienteService{
         return clienteRepository.findAll();
     }
 
+    @Override
     public Optional<Cliente> buscar(Integer id){
         Optional<Cliente> cliente = clienteRepository.findById(id);
 
@@ -32,6 +33,7 @@ public class ClienteServiceImpl implements ClienteService{
         return cliente;
     }
 
+    @Override
     public Cliente salvar(Cliente cliente){
         cliente.setId(null);
 
@@ -39,6 +41,7 @@ public class ClienteServiceImpl implements ClienteService{
 
     }
 
+    @Override
     public void deletar(Integer id){
         try {
             clienteRepository.deleteById(id);
@@ -47,6 +50,7 @@ public class ClienteServiceImpl implements ClienteService{
         }
     }
 
+    @Override
     public void alterar(Cliente cliente){
         verificarSeClienteExiste(cliente);
         clienteRepository.save(cliente);
@@ -56,6 +60,7 @@ public class ClienteServiceImpl implements ClienteService{
         buscar(cliente.getId());
     }
 
+    @Override
     public List<Cliente> consultarClientesPorUsuario(Integer codigoUsuario) {
         return clienteRepository.consultarClientesPorUsuario(codigoUsuario);
     }

@@ -17,10 +17,12 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Override
     public List<Usuario> listar(){
         return usuarioRepository.findAll();
     }
 
+    @Override
     public Optional<Usuario> buscar(Integer id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
 
@@ -31,6 +33,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuario;
     }
 
+    @Override
     public Usuario salvar(Usuario usuario){
         usuario.setId(null);
 
@@ -38,6 +41,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     }
 
+    @Override
     public void deletar(Integer id){
         try {
             usuarioRepository.deleteById(id);
@@ -46,6 +50,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         }
     }
 
+    @Override
     public void alterar(Usuario usuario){
         verificarSeUsuarioExiste(usuario);
         usuarioRepository.save(usuario);
