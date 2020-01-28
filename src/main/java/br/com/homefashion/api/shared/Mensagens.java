@@ -8,6 +8,8 @@ public class Mensagens {
 
     public static final String USUARIO_NAO_ENCONTRADO = "Usuário não encontrado!";
 
+    public static final String VENDA_NAO_ENCONTRADA = "Venda não encontrada!";
+
     public static final String CAMPO_NAO_NULO = "O campo não pode ser nulo!";
 
     public static final String CAMPO_NAO_VAZIO = "O campo não pode ser vazio!";

@@ -1,7 +1,7 @@
 package br.com.homefashion.api.services;
 
 import br.com.homefashion.api.domain.Cliente;
-import br.com.homefashion.api.repository.ClientesRepository;
+import br.com.homefashion.api.repository.ClienteRepository;
 import br.com.homefashion.api.services.exceptions.ClienteNaoEncontradoException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -11,17 +11,17 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ClientesService {
+public class ClienteService {
 
     @Autowired
-    private ClientesRepository clientesRepository;
+    private ClienteRepository clienteRepository;
 
     public List<Cliente> listar(){
-        return clientesRepository.findAll();
+        return clienteRepository.findAll();
     }
 
     public Optional<Cliente> buscar(Integer id){
-        Optional<Cliente> cliente = clientesRepository.findById(id);
+        Optional<Cliente> cliente = clienteRepository.findById(id);
 
         if(cliente.isEmpty()){
             throw new ClienteNaoEncontradoException();
@@ -33,13 +33,13 @@ public class ClientesService {
     public Cliente salvar(Cliente cliente){
         cliente.setId(null);
 
-        return clientesRepository.save(cliente);
+        return clienteRepository.save(cliente);
 
     }
 
     public void deletar(Integer id){
         try {
-            clientesRepository.deleteById(id);
+            clienteRepository.deleteById(id);
         }catch (EmptyResultDataAccessException e){
             throw new ClienteNaoEncontradoException();
         }
@@ -47,7 +47,7 @@ public class ClientesService {
 
     public void alterar(Cliente cliente){
         verificarSeClienteExiste(cliente);
-        clientesRepository.save(cliente);
+        clienteRepository.save(cliente);
     }
 
     private void verificarSeClienteExiste(Cliente cliente){
