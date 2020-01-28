@@ -54,4 +54,8 @@ public class ClienteService {
         buscar(cliente.getId());
     }
 
+    public List<Cliente> consultarClientesPorUsuario(Integer codigoUsuario) {
+        return clienteRepository.consultarClientesPorUsuario(codigoUsuario);
+    }
+
 }

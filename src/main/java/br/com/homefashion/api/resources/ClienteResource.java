@@ -65,4 +65,9 @@ public class ClienteResource {
 
         return ResponseEntity.noContent().build();
     }
+
+    @RequestMapping(value = "/usuario/{codigoUsuario}", method = RequestMethod.GET)
+    public ResponseEntity<List<Cliente>> listarClientesPorUsuario(@PathVariable("codigoUsuario") Integer codigoUsuario) {
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.consultarClientesPorUsuario(codigoUsuario));
+    }
 }
