@@ -54,4 +54,8 @@ public class VendaService {
         buscar(venda.getId());
     }
 
+    public List<Venda> consultarVendasPorUsuario(Integer codigoUsuario) {
+        return vendaRepository.consultarVendasPorUsuario(codigoUsuario);
+    }
+
 }
