@@ -1,6 +1,6 @@
 package br.com.homefashion.api.handler;
 
-import br.com.homefashion.api.domain.DetalhesErro;
+import br.com.homefashion.api.domain.dto.DetalhesErro;
 import br.com.homefashion.api.services.exceptions.ClienteNaoEncontradoException;
 import br.com.homefashion.api.services.exceptions.UsuarioNaoEncontradoException;
 import org.springframework.http.HttpStatus;

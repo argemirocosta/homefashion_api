@@ -1,4 +1,4 @@
-package br.com.homefashion.api.domain;
+package br.com.homefashion.api.domain.dto;
 
 import java.util.Objects;
 
