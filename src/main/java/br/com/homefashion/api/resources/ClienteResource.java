@@ -3,6 +3,9 @@ package br.com.homefashion.api.resources;
 import br.com.homefashion.api.domain.Cliente;
 import br.com.homefashion.api.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +31,11 @@ public class ClienteResource {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<Cliente>> listar() {
-        return ResponseEntity.status(HttpStatus.OK).body(clienteService.listar());
+    public ResponseEntity<Page<Cliente>> listar(@RequestParam int pagina, @RequestParam int qtd) {
+
+        Pageable paginacao = PageRequest.of(pagina, qtd);
+
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.listar(paginacao));
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
