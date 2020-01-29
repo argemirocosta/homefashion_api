@@ -13,4 +13,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query(CONSULTA_CLIENTES_POR_USUARIO)
     List<Cliente> consultarClientesPorUsuario(@Param("codigoUsuario") Integer codigoUsuario);
+
+    List<Cliente> findByUsuarioNome(@Param("nomeUsuario") String nomeUsuario);
 }

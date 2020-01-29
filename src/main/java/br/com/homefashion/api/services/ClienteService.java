@@ -19,4 +19,6 @@ public interface ClienteService {
 
     List<Cliente> consultarClientesPorUsuario(Integer codigoUsuario);
 
+    List<Cliente> consultarClientesPorNomeUsuario(String nomeUsuario);
+
 }

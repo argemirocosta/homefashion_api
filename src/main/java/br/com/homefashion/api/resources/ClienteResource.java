@@ -70,4 +70,9 @@ public class ClienteResource {
     public ResponseEntity<List<Cliente>> listarClientesPorUsuario(@PathVariable("codigoUsuario") Integer codigoUsuario) {
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.consultarClientesPorUsuario(codigoUsuario));
     }
+
+    @RequestMapping(value = "/usuario/nome/{nomeUsuario}", method = RequestMethod.GET)
+    public ResponseEntity<List<Cliente>> listarClientesPorNomeUsuario(@PathVariable("nomeUsuario") String nomeUsuario) {
+        return ResponseEntity.status(HttpStatus.OK).body(clienteService.consultarClientesPorNomeUsuario(nomeUsuario));
+    }
 }
