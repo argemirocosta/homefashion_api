@@ -52,8 +52,9 @@ public class Cliente implements Serializable {
     private Integer telefone2;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "usuario")
-    private Integer usuario;
+    @OneToOne
+    @JoinColumn(name = "usuario")
+    private Usuario usuario;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "cep")
@@ -99,22 +100,6 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    public Integer getTelefone1() {
-        return telefone1;
-    }
-
-    public void setTelefone1(Integer telefone1) {
-        this.telefone1 = telefone1;
-    }
-
-    public Integer getTelefone2() {
-        return telefone2;
-    }
-
-    public void setTelefone2(Integer telefone2) {
-        this.telefone2 = telefone2;
-    }
-
     public Date getDataNascimento() {
         return dataNascimento;
     }
@@ -139,11 +124,27 @@ public class Cliente implements Serializable {
         this.rg = rg;
     }
 
-    public Integer getUsuario() {
+    public Integer getTelefone1() {
+        return telefone1;
+    }
+
+    public void setTelefone1(Integer telefone1) {
+        this.telefone1 = telefone1;
+    }
+
+    public Integer getTelefone2() {
+        return telefone2;
+    }
+
+    public void setTelefone2(Integer telefone2) {
+        this.telefone2 = telefone2;
+    }
+
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Integer usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 

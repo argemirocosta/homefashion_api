@@ -19,8 +19,9 @@ public class Venda implements Serializable {
     private Integer id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "id_cliente")
-    private Integer idCliente;
+    @OneToOne
+    @JoinColumn(name = "id_cliente")
+    private Cliente cliente;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "valor")
@@ -34,10 +35,6 @@ public class Venda implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data")
     private Date data;
-
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "usuario")
-    private Integer idUsuario;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "cancelada")
@@ -56,12 +53,12 @@ public class Venda implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Double getValor() {
@@ -88,14 +85,6 @@ public class Venda implements Serializable {
         this.data = data;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
-    }
-
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
-    }
-
     public Boolean getCancelada() {
         return cancelada;
     }
@@ -118,29 +107,27 @@ public class Venda implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Venda venda = (Venda) o;
         return Objects.equals(id, venda.id) &&
-                Objects.equals(idCliente, venda.idCliente) &&
+                Objects.equals(cliente, venda.cliente) &&
                 Objects.equals(valor, venda.valor) &&
                 Objects.equals(qtd, venda.qtd) &&
                 Objects.equals(data, venda.data) &&
-                Objects.equals(idUsuario, venda.idUsuario) &&
                 Objects.equals(cancelada, venda.cancelada) &&
                 Objects.equals(dataHoraCancelamento, venda.dataHoraCancelamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idCliente, valor, qtd, data, idUsuario, cancelada, dataHoraCancelamento);
+        return Objects.hash(id, cliente, valor, qtd, data, cancelada, dataHoraCancelamento);
     }
 
     @Override
     public String toString() {
         return "Venda{" +
                 "id=" + id +
-                ", idCliente=" + idCliente +
+                ", cliente=" + cliente +
                 ", valor=" + valor +
                 ", qtd=" + qtd +
                 ", data=" + data +
-                ", idUsuario=" + idUsuario +
                 ", cancelada=" + cancelada +
                 ", dataHoraCancelamento=" + dataHoraCancelamento +
                 '}';

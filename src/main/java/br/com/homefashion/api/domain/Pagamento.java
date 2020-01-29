@@ -32,8 +32,9 @@ public class Pagamento implements Serializable {
     private Date dataPagamento;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @Column(name = "usuario")
-    private Integer idUsuario;
+    @OneToOne
+    @JoinColumn(name = "usuario")
+    private Usuario usuario;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "cancelada")
@@ -76,12 +77,12 @@ public class Pagamento implements Serializable {
         this.dataPagamento = dataPagamento;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public Boolean getCancelada() {
@@ -109,14 +110,14 @@ public class Pagamento implements Serializable {
                 Objects.equals(idVenda, pagamento.idVenda) &&
                 Objects.equals(valorPago, pagamento.valorPago) &&
                 Objects.equals(dataPagamento, pagamento.dataPagamento) &&
-                Objects.equals(idUsuario, pagamento.idUsuario) &&
+                Objects.equals(usuario, pagamento.usuario) &&
                 Objects.equals(cancelada, pagamento.cancelada) &&
                 Objects.equals(dataHoraCancelamento, pagamento.dataHoraCancelamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, idVenda, valorPago, dataPagamento, idUsuario, cancelada, dataHoraCancelamento);
+        return Objects.hash(id, idVenda, valorPago, dataPagamento, usuario, cancelada, dataHoraCancelamento);
     }
 
     @Override
@@ -126,7 +127,7 @@ public class Pagamento implements Serializable {
                 ", idVenda=" + idVenda +
                 ", valorPago=" + valorPago +
                 ", dataPagamento=" + dataPagamento +
-                ", idUsuario=" + idUsuario +
+                ", usuario=" + usuario +
                 ", cancelada=" + cancelada +
                 ", dataHoraCancelamento=" + dataHoraCancelamento +
                 '}';
