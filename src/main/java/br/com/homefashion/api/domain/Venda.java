@@ -37,6 +37,10 @@ public class Venda implements Serializable {
     private Date data;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @Column(name = "usuario")
+    private Integer idUsuario;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @Column(name = "cancelada")
     private Boolean cancelada;
 
@@ -85,6 +89,14 @@ public class Venda implements Serializable {
         this.data = data;
     }
 
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     public Boolean getCancelada() {
         return cancelada;
     }
@@ -111,13 +123,14 @@ public class Venda implements Serializable {
                 Objects.equals(valor, venda.valor) &&
                 Objects.equals(qtd, venda.qtd) &&
                 Objects.equals(data, venda.data) &&
+                Objects.equals(idUsuario, venda.idUsuario) &&
                 Objects.equals(cancelada, venda.cancelada) &&
                 Objects.equals(dataHoraCancelamento, venda.dataHoraCancelamento);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, cliente, valor, qtd, data, cancelada, dataHoraCancelamento);
+        return Objects.hash(id, cliente, valor, qtd, data, idUsuario, cancelada, dataHoraCancelamento);
     }
 
     @Override
@@ -128,6 +141,7 @@ public class Venda implements Serializable {
                 ", valor=" + valor +
                 ", qtd=" + qtd +
                 ", data=" + data +
+                ", idUsuario=" + idUsuario +
                 ", cancelada=" + cancelada +
                 ", dataHoraCancelamento=" + dataHoraCancelamento +
                 '}';
