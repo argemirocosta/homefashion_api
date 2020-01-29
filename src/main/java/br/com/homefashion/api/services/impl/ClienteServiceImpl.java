@@ -67,7 +67,7 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public List<Cliente> consultarClientesPorNomeUsuario(String nomeUsuario) {
-        return clienteRepository.findByUsuarioNome(nomeUsuario);
+        return clienteRepository.findByUsuario_Nome(nomeUsuario);
     }
 
 }
