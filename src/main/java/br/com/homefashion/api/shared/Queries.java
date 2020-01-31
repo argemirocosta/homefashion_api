@@ -8,7 +8,7 @@ public class Queries {
             "SELECT v FROM Venda v WHERE usuario = :codigoUsuario";
 
     public static final String CONSULTA_CLIENTES_POR_USUARIO =
-            "SELECT c FROM Cliente c WHERE usuario = :codigoUsuario ORDER BY c.nome";
+            "SELECT c FROM Cliente c WHERE usuario.id = :codigoUsuario ORDER BY c.nome";
 
     public static final String CONSULTA_PAGAMENTOS_POR_VENDA =
             "SELECT p FROM Pagamento p WHERE idVenda = :codigoVenda";
