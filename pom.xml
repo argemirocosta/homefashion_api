@@ -12,6 +12,7 @@
     <artifactId>homefashion_api</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>homefashion_api</name>
+    <packaging>war</packaging>
     <description>API HomeFashion</description>
 
     <properties>
