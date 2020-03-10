@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class Pagamento implements Serializable {
     private Integer id;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @NotNull
     @Column(name = "id_venda")
     private Integer idVenda;
 
