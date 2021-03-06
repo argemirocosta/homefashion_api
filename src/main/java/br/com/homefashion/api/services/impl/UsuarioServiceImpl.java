@@ -26,11 +26,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Optional<Usuario> buscar(Integer id){
         Optional<Usuario> usuario = usuarioRepository.findById(id);
 
-        if(usuario.isEmpty()){
-            throw new UsuarioNaoEncontradoException();
+        if (usuario.isPresent()) {
+            return usuario;
         }
+        throw new UsuarioNaoEncontradoException();
 
-        return usuario;
     }
 
     @Override

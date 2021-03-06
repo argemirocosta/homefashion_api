@@ -28,11 +28,11 @@ public class ClienteServiceImpl implements ClienteService{
     public Optional<Cliente> buscar(Integer id){
         Optional<Cliente> cliente = clienteRepository.findById(id);
 
-        if(cliente.isEmpty()){
-            throw new ClienteNaoEncontradoException();
+        if (cliente.isPresent()) {
+            return cliente;
         }
+        throw new ClienteNaoEncontradoException();
 
-        return cliente;
     }
 
     @Override

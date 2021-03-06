@@ -25,11 +25,11 @@ public class VendaServiceImpl implements VendaService {
     public Optional<Venda> buscar(Integer id){
         Optional<Venda> venda = vendaRepository.findById(id);
 
-        if(venda.isEmpty()){
-            throw new VendaNaoEncontradaException();
+        if (venda.isPresent()) {
+            return venda;
         }
+        throw new VendaNaoEncontradaException();
 
-        return venda;
     }
 
     @Override
