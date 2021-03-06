@@ -25,11 +25,11 @@ public class PagamentoServiceImpl implements PagamentoService {
     public Optional<Pagamento> buscar(Integer id) {
         Optional<Pagamento> pagamento = pagamentoRepository.findById(id);
 
-        if (pagamento.isPresent()) {
-            return pagamento;
+        if (pagamento.isEmpty()) {
+            throw new PagamentoNaoEncontradoException();
         }
-        throw new PagamentoNaoEncontradoException();
 
+        return pagamento;
     }
 
     @Override
